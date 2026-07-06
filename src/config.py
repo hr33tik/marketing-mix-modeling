@@ -217,6 +217,18 @@ TV_COST_PER_GRP = 18000
 
 INFLUENCER_COST_PER_POST = 60000
 
+
+CHANNEL_COST = {
+    "Salesforce": SALESFORCE_COST_PER_CALL,
+    "Email": EMAIL_COST_PER_EMAIL,
+    "Website": 0.25,              # Cost per website visit (INR)
+    "TV": TV_COST_PER_GRP,
+    "Meta": META_CPM / 1000,       # Convert CPM to Cost per Impression
+    "Instagram": INSTAGRAM_CPM / 1000,
+    "Influencer": INFLUENCER_COST_PER_POST
+}
+
+
 # ==========================================================
 # OUTPUT FILES
 # ==========================================================
@@ -224,3 +236,99 @@ INFLUENCER_COST_PER_POST = 60000
 RAW_DATA_FILE = "data/raw/raw_data.csv"
 
 SPEND_DATA_FILE = "data/raw/weekly_spends.csv"
+
+# ==========================================================
+# TRUE ADSTOCK DECAYS
+# (Used ONLY to generate synthetic sales)
+# ==========================================================
+
+TRUE_ADSTOCK = {
+
+    "Salesforce": 0.65,
+    "Email": 0.20,
+    "Website": 0.10,
+    "TV": 0.80,
+    "Meta": 0.55,
+    "Instagram": 0.45,
+    "Influencer": 0.30
+
+}
+
+
+# ==========================================================
+# TRUE COEFFICIENTS
+# (Used ONLY while generating sales)
+# ==========================================================
+
+TRUE_COEFFICIENTS = {
+
+    "Salesforce": 0.08,
+    "Email": 0.002,
+    "Website": 0.0008,
+    "TV": 1.8,
+    "Meta": 0.00005,
+    "Instagram": 0.00004,
+    "Influencer": 15
+
+}
+
+
+# ==========================================================
+# SALES PARAMETERS
+# ==========================================================
+
+BASE_SALES = 300
+
+SALES_CARRYOVER = 0.35
+
+SALES_NOISE_STD = 30
+
+# ==========================================================
+# TRUE TRANSFORMATIONS
+# ==========================================================
+
+TRUE_TRANSFORMATIONS = {
+
+    "Salesforce": "log",
+    "Email": "log",
+    "Website": "log",
+    "TV": "log",
+    "Meta": "log",
+    "Instagram": "log",
+    "Influencer": "log"
+
+}
+
+# ==========================================================
+# BASE DEMAND
+# ==========================================================
+
+BASE_STATE_DEMAND = {
+    state: int(500 * STATE_SCALE[state])
+    for state in STATES
+}
+
+
+# ==========================================================
+# SALES PARAMETERS
+# ==========================================================
+
+BASE_SALES = 300
+
+SALES_CARRYOVER = 0.35
+
+SALES_NOISE_STD = 25
+
+AVERAGE_SELLING_PRICE = 2500
+
+
+# ==========================================================
+# SEASONALITY
+# ==========================================================
+
+MONTH_END_UPLIFT = 0.05
+
+QUARTER_END_UPLIFT = 0.15
+
+YEAR_END_UPLIFT = 0.10
+
